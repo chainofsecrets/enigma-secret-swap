@@ -73,5 +73,22 @@ Run a `bash` shell in the `enigmachain` container:
 docker exec -it enigmachain /bin/bash
 ```
 
-...
+The local devnet `enigmachain` is configured with the following addresses and transaction hashes:
+```
+Leader key: 
 
+`MultisigApproveAddress`: enigma1n4pc2w3us9n4axa0ppadd3kv3c0sar8c4ju6k7
+
+Operator a address: enigma1hczr6ps3vfjcsatj6l75hsuunfhzyzf9gpgpyq
+
+Operator b address: enigma1u93mxyscasnf3ukpd7shs88zusfjw98fn0ljxz
+
+Multisignature Threshold (N): 2
+
+Burn transaction hash: 0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+Ethereum sender address: 0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB
+
+SCRT receiver address: enigma1yuth8vrhemuu5m0ps0lv75yjhc9t86tf9hf83z
+
+```

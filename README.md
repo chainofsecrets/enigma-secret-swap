@@ -4,6 +4,7 @@ Documentation for the test planning and implementation for the ENG to SCRT Burn!
 
 Information included:
 - Resources
+- Pre-conditions
 - Test Plans (Dev, Testnet, Functional and Stress)
 - Test Results
 
@@ -31,3 +32,46 @@ Some information on creating and using Multisig transactions on the Enigma Block
 - [Enigma Blockchain Tokenswap](https://github.com/Cashmaney/enigmachain/tree/master/x/tokenswap)
 
 Created by another Enigma Blockchain validator, _Cashmaney_, this is the repo that contains the actual SCRT minting code and is invoked by the Leader (above).
+
+## Pre-conditions
+
+### Governance Proposals
+
+- [ ] Proposal to identify Leader and N Operators (N to be determined)
+
+- [ ] Proposal to approve the Leader's `MultisigApproveAddress` with information including all involved addresses and method of creation
+
+- [ ] Proposal to set `MintingEnabled` to _true_ to turn on the actual token swap module.
+
+### To Be Determined
+
+- [ ] There's a reference to a _genesis_ file in the `x/tokenswap module`. What do we need to do there?
+- [ ] How will the Ethereum `Burn` contract be funded (for gas requirements) prior to enabling the token swap?
+
+## Local Devnet
+
+### Setup
+
+Clone the tokenswap repo:
+
+```
+git clone https://github.com/Cashmaney/enigmachain/tree/master/x/tokenswap
+```
+
+Build the docker container and run the local Enigma Blockchain:
+```
+docker build -f .\Dockerfile_build -t enigmachain .
+```
+
+Run the container:
+```
+docker run --name enigmachain -t enigmachain
+```
+
+Run a `bash` shell in the `enigmachain` container:
+```
+docker exec -it enigmachain /bin/bash
+```
+
+...
+

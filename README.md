@@ -99,3 +99,6 @@ Check the keys:
 ```
 enigmacli keys list --keyring-backend test
 ````
+
+(enigmacli-keys-list.png)
+

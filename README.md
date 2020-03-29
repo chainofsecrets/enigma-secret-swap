@@ -50,6 +50,8 @@ The Testnet and Mainnet releases of the Enigma Blockchain, including the `x/toke
 
 ## Questions
 
+- [ ] Need to get an update on using MathWallet for Testnet testing - _Eric | MathWallet_
+
 - [ ] There's a reference to a _genesis_ file in the tokenswap module. What do we need to do there?
 
 - [ ] How will the Ethereum `Burn` contract be funded (for gas requirements) prior to enabling the token swap? We also need to determine how much ETH will be required.
@@ -164,7 +166,7 @@ _In Progress ..._
 
 ### Functional End-to-End Testing
 
-**NOTE**: using Burn Form
+**NOTE**: using Burn Form UI and MathWallet
 
 1. Happy Path - one swap request for 10 ENG to SCRT
 2. Happy Path - one swap request for 8,360,000 ENG to SCRT
@@ -176,6 +178,7 @@ _In Progress ..._
 4. Invalid ENG wallet address
 5. Invalid SCRT wallet address
 6. Invalid token swap amount (non-numeric, negative, non-integer)
+
 
 _more TBD_
 

@@ -2,6 +2,14 @@
 
 Documentation for the test planning and implementation for the ENG to SCRT Burn! proposal created by SecretNodes.org: https://ipfs.io/ipfs/QmUvhWUYW1jpqjZSJjRKUB5y1RixuuvaD27Vbtgbvf1Kjm/Burn_ENG_for_SCRT-v1.pdf
 
+This repo uses Git submodules to include the ENG to SCRT Unidirectional Swap Tooling and Enigma Blockchain with Tokenswap repositories. To clone and work with this repository for testing clone the repo using:
+
+```
+git clone --recurse-submodules https://github.com/lauraweindorf/enigma-secret-swap
+```
+
+For further information on working with a "Super Repository" that contains other repositories as sub-directories see [7.11 Git Tools - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
 Information included:
 - Resources
 - Pre-conditions
@@ -15,9 +23,9 @@ Information included:
 Written by _ScotchFinance_, an Enigma Blockchain validator, this document outlines the components and workflow for the setup and implementation for the ENG to SCRT swap process.
 
 
-- [ENG to SCRT Unidirectional Swap Tooling](https://github.com/scotchfinance/scrt-swap)
+- [ENG to SCRT Unidirectional Swap Tooling](https://github.com/levackt/scrt-swap)
 
-Also, provided by _ScotchFinance_, this repo contains the UI front-end (for submitting user's swap request) and the code and contract responsible for coordinating the leader and operator actions resulting in the `Burn` request that's emitted for a valid swap request.
+Also, provided by _ScotchFinance_, with additional contribributions from Taariq Levack, this repo contains the UI front-end (for submitting user's swap request) and the code and contract responsible for coordinating the leader and operator actions resulting in the `Burn` request that's emitted for a valid swap request.
 
 The token swap Leader and Operators are elected through an Enigma Blockchain Governance proposal prior, as outlined in the doc above (_Enigma Swap - Multisig Setup Proposal_). The proposal will outline the election of N operators and 1 leader, where the operators wait for a `Burn` event, process the transaction (adding their signature), and storing the transaction in a database. The Leader waits for the `Burn` event as well and creates an unsigned mutisig transaction and stores that in the database. When a `Burn` transaction in the database has M-of-N signatures, the Leader then creates the token swap transaction, stores in the database, and broadcasts the transaction to the validator nodes on the chain.
 
@@ -100,5 +108,5 @@ Check the keys:
 enigmacli keys list --keyring-backend test
 ````
 
-[](enigmacli-keys-list.png)
+![](enigmacli-keys-list.png)
 

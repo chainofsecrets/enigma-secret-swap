@@ -1,0 +1,6 @@
+[submodule "scrt-swap"]
+	path = scrt-swap
+	url = https://github.com/levackt/scrt-swap.git
+[submodule "enigmachain"]
+	path = enigmachain
+	url = https://github.com/Cashmaney/enigmachain

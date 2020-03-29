@@ -1,6 +1,6 @@
 # enigma-secret-swap
 
-Documentation for the test planning and implementation for the ENG to SCRT Burn! proposal created by SecretNodes.org: https://ipfs.io/ipfs/QmUvhWUYW1jpqjZSJjRKUB5y1RixuuvaD27Vbtgbvf1Kjm/Burn_ENG_for_SCRT-v1.pdf
+Test planning and implementation for the ENG to SCRT Burn! proposal created by SecretNodes.org: https://ipfs.io/ipfs/QmUvhWUYW1jpqjZSJjRKUB5y1RixuuvaD27Vbtgbvf1Kjm/Burn_ENG_for_SCRT-v1.pdf
 
 This repo uses Git submodules to include the ENG to SCRT Unidirectional Swap Tooling and Enigma Blockchain with Tokenswap repositories. To clone and work with this repository for testing clone the repo using:
 
@@ -9,12 +9,6 @@ git clone --recurse-submodules https://github.com/lauraweindorf/enigma-secret-sw
 ```
 
 For further information on working with a "Super Repository" that contains other repositories as sub-directories see [7.11 Git Tools - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
-
-Information included:
-- Resources
-- Pre-conditions
-- Test Plans (Dev, Testnet, Functional and Stress)
-- Test Results
 
 ## Resources
 
@@ -41,7 +35,7 @@ Some information on creating and using Multisig transactions on the Enigma Block
 
 Created by another Enigma Blockchain validator, _Cashmaney_, this is the repo that contains the actual SCRT minting code and is invoked by the Leader (above).
 
-## Pre-conditions
+## Assumptions
 
 ### Governance Proposals
 
@@ -54,7 +48,7 @@ There are Enigma Blockchain governance proposals required before the secret swap
 The Testnet and Mainnet releases of the Enigma Blockchain, including the `x/tokenswap` module, will require coordination and participation with the Enigma Core team.
 
 
-### Questions to be Addressed
+## Questions
 
 - [ ] There's a reference to a _genesis_ file in the tokenswap module. What do we need to do there?
 
@@ -62,14 +56,16 @@ The Testnet and Mainnet releases of the Enigma Blockchain, including the `x/toke
 
 - [ ] Will we need a Community Spend proposal to fund the `Burn` contract?
 
-## Local Developer Testnet
+# Test Plans
+
+## Local Developer Testnet Plan
 
 ### Setup
 
-Clone the tokenswap repo:
+Change directory to the `enigmachain` tokenswap repo:
 
 ```
-git clone https://github.com/Cashmaney/enigmachain/tree/master/x/tokenswap
+cd enigmachain
 ```
 
 Build the docker container and run the local Enigma Blockchain:
@@ -120,12 +116,18 @@ enigmacli keys list --keyring-backend test
 
 ![](enigmacli-keys-list.png)
 
+_In Progress ..._
+
 #### ENG to SCRT Unidirectional Swap Tooling
 
 _In Progress ..._
 
+## Local Developer Testnet Plan Results
 
-## Testnet
+_In Progress ..._
+
+
+## Testnet Test Plan
 
 ### Setup
 
@@ -149,9 +151,20 @@ _In Progress ..._
 
 - [ ] Deploy ENG to SCRT Ethereum contract to Testnet (Kovan) and publish contract address - _TBD_
 
-### Test Plan
 
-#### Functional End-to-End Testing
+### Integration Testing
+
+**NOTE**: using Remix or Ethereum Studio
+
+1. Happy Path - Token swap request
+2. Token swap request by non-Leader
+3. Invalid parameters for token swap
+4. ENG wallet address **not** owned by sender
+5. SCRT wallet address **not** owned by receiver
+
+### Functional End-to-End Testing
+
+**NOTE**: using Burn Form
 
 1. Happy Path - one swap request for 10 ENG to SCRT
 2. Happy Path - one swap request for 8,360,000 ENG to SCRT
@@ -160,49 +173,49 @@ _In Progress ..._
 	Binance has almost 20,000 ENG wallets (viewed on 3/29/20)
 	The largest holder of ENG is _Binance 7_ with almost 25,000,000 ENG
 
-2. Valid ENG wallet address **not** owned by user
-3. Invalid ENG wallet address
-4. Valid SCRT wallet address **not** owned by user
+4. Invalid ENG wallet address
 5. Invalid SCRT wallet address
 6. Invalid token swap amount (non-numeric, negative, non-integer)
 
 _more TBD_
 
-#### Security Testing
+### Security Testing
 
 _TBD_
 
-#### Stress/Load Testing
+### Stress/Load Testing
+
+- [ ] Determine if the Enigma core team can help with this - _Laura | ChainOfSecrets.org_
 
 1. Identify stress testing tool
 2. Identify ball park number of ENG hodlers 
 2. Design load test configuration
 3. Create load test script
 4. Test load test with dry run
-5. Run load test 
-6. Analyze and report results
+5. Run load tests
 
-### Test Plan Results
+## Testnet Test Plan Results
 
 _TBD_
 
-## Token Swap Audit
 
-- [ ] Conduct audit
+# ENG to SCRT Burn! Audit
 
-- [ ] Address required changes for `enigmachain` token swap module
+- [ ] Conduct audit - _Auditor_
 
-- [ ] Address required changes for ENG to SCRT Unidirectional Token Swap Tooling
+- [ ] Address, if needed, changes for `enigmachain` token swap module
 
-- [ ] Re-run functional/end-to-end, security and stress tests
+- [ ] Address, if needed, changes for ENG to SCRT Unidirectional Token Swap Tooling
+
+- [ ] Run applicable tests
 
 
 These activities will be run iteratively, if applicable.
 
 
-## Mainnet (enigma-1)
+# Mainnet (enigma-1) Plan
 
-### Governance Proposals
+## Governance Proposals
 
 - [ ] Proposal to identify Leader and N Operators (N to be determined) - _SecretNodes.org_
 
@@ -214,7 +227,7 @@ These activities will be run iteratively, if applicable.
 
 	_After release has been approved and installed on mainnet nodes_
 
-### Deployment
+## Deployment
 
 - [ ] Initiate Pull Request to `https://github.com/enigmampc/EnigmaBlockchain` for token swap module - _Cashmaney_
 
@@ -228,17 +241,17 @@ These activities will be run iteratively, if applicable.
 
 	(This should be deployed to a cloud platform capable of auto-scaling)
 
-- [ ] Deploy ENG to SCRT Ethereum contract to Testnet (Kovan) and publish contract address - _TBD_
+- [ ] Deploy ENG to SCRT Ethereum contract to Ethereum Mainnet and publish contract address - _TBD_
 
 - [ ] MathWallet token swap front-end for dry-run is setup and made available to tester(s)
 
-### Dry Run
+## Dry Run
 
 - [ ] Tester conducts dry-run with mainnet ENG and verifies results
 
 - [ ] Validator volunteers conduct dry-run ENG to SCRT swap
 
-### ENG to SCRT Burn!
+## ENG to SCRT Burn!
 
 - [ ] Validators get ready for token swap requests (monitoring and such)
 
@@ -246,3 +259,5 @@ These activities will be run iteratively, if applicable.
 
 - [ ] Leader and Operators (validators) provide support for issues reported by users
 
+
+**ENG to SCRT Burn! Complete**

@@ -63,16 +63,6 @@ Build the docker container and run the local Enigma Blockchain:
 docker build -f .\Dockerfile_build -t enigmachain .
 ```
 
-Run the container:
-```
-docker run --name enigmachain -t enigmachain
-```
-
-Run a `bash` shell in the `enigmachain` container:
-```
-docker exec -it enigmachain /bin/bash
-```
-
 The local devnet `enigmachain` is configured with the following addresses and transaction hashes:
 ```
 Leader key: 
@@ -92,3 +82,20 @@ Ethereum sender address: 0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB
 SCRT receiver address: enigma1yuth8vrhemuu5m0ps0lv75yjhc9t86tf9hf83z
 
 ```
+
+### Run Local Devnet
+
+Run the container:
+```
+docker run --name enigmachain -t enigmachain
+```
+
+In another terminal run a `bash` shell in the `enigmachain` container:
+```
+docker exec -it enigmachain /bin/bash
+```
+
+Check the keys:
+```
+enigmacli keys list --keyring-backend test
+````

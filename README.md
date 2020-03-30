@@ -48,15 +48,19 @@ There are Enigma Blockchain governance proposals required before the secret swap
 The Testnet and Mainnet releases of the Enigma Blockchain, including the `x/tokenswap` module, will require coordination and participation with the Enigma Core team.
 
 
-## Questions
+### Token Swap Fees
+
+The user pays the ETH gas per swap transaction. The estimated cost is under 24k to send ENG to the _burn_ contract address and an additional amount (under 50k) to approve the contract transfer for a total of < 50k gas.
+
+The gas estimation will be included in the `scrt-swap` Burn Form UI to make it clear for users that don't use MetaMask. 
+
+Only a bit of ETH (less than 0.01) wil be required to deploy the token swap contract.
+
+## TBD
 
 - [ ] Need to get an update on using MathWallet for Testnet testing - _Eric | MathWallet_
 
 - [ ] There's a reference to a _genesis_ file in the tokenswap module. What do we need to do there?
-
-- [ ] How will the Ethereum `Burn` contract be funded (for gas requirements) prior to enabling the token swap? We also need to determine how much ETH will be required.
-
-- [ ] Will we need a Community Spend proposal to fund the `Burn` contract?
 
 # Test Plans
 
@@ -185,17 +189,6 @@ _more TBD_
 ### Security Testing
 
 _TBD_
-
-### Stress/Load Testing
-
-- [ ] Determine if the Enigma core team can help with this - _Laura | ChainOfSecrets.org_
-
-1. Identify stress testing tool
-2. Identify ball park number of ENG hodlers 
-2. Design load test configuration
-3. Create load test script
-4. Test load test with dry run
-5. Run load tests
 
 ## Testnet Test Plan Results
 

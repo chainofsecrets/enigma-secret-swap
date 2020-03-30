@@ -5,7 +5,7 @@ Test planning and implementation for the ENG to SCRT Burn! proposal created by S
 This repo uses Git submodules to include the ENG to SCRT Unidirectional Swap Tooling and Enigma Blockchain with Tokenswap repositories. To clone and work with this repository for testing clone the repo using:
 
 ```
-git clone --recurse-submodules https://github.com/lauraweindorf/enigma-secret-swap
+git clone --recurse-submodules https://github.com/chainofsecrets/enigma-secret-swap
 ```
 
 For further information on working with a "Super Repository" that contains other repositories as sub-directories see [7.11 Git Tools - Submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).

@@ -45,7 +45,11 @@ There are Enigma Blockchain governance proposals required before the secret swap
 
 ### Enigma Blockchain Release(s)
 
-The Testnet and Mainnet releases of the Enigma Blockchain, including the `x/tokenswap` module, will require coordination and participation with the Enigma Core team.
+The Testnet release will be created from _Cashmaney's_ `enigmachain` repository. After successful testing _Cashmaney_ will submit a PR to the Enigma Blockchain repository for approval and merging: 
+
+`https://github.com/enigmampc/EnigmaBlockchain`
+
+The Enigma core team will create a Mainnet release for `enigma-1` containing the tokenswap module and will coordinate the installation and participation amongst validators.
 
 
 ### Token Swap Fees

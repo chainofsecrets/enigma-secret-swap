@@ -35,6 +35,13 @@ Some information on creating and using Multisig transactions on the Enigma Block
 
 Created by another Enigma Blockchain validator, _Cashmaney_, this is the repo that contains the actual SCRT minting code and is invoked by the Leader (above).
 
+## Disclaimer
+
+This repository and submodules, including all smart contract and tokenswap chain components, has not been professionally audited and is not intended 
+for use in a production environment. It is intended for testing **ONLY**. As such, users should **NOT** trust the system to securely hold mainnet 
+funds. Any developers attempting to use _enigma-secret-swap_ as a base for their own ERC20 to Cosmos/SDK token swap will need to develop and audit their own implementation.
+
+
 ## Assumptions
 
 ### Governance Proposals
@@ -261,3 +268,12 @@ These activities will be run iteratively, if applicable.
 
 
 **ENG to SCRT Burn! Complete**
+
+## Legal Disclaimer
+
+THIS SOFTWARE IS PROVIDED BY THE CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, 
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+

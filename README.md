@@ -74,6 +74,8 @@ Only a bit of ETH (less than 0.01) wil be required to deploy the token swap cont
 
 ### Setup
 
+#### Enigma Blockchain
+
 Change directory to the `enigmachain` tokenswap repo:
 
 ```
@@ -105,6 +107,31 @@ SCRT receiver address: enigma1yuth8vrhemuu5m0ps0lv75yjhc9t86tf9hf83z
 
 ```
 
+#### ENG to SCRT Unidirectional Swap Tooling (scrt-swap)
+
+`scrt-swap` consists of:
+
+- Mongo database (run in docker)
+- Smart contract (run in local blockchain)
+- Leader and Operator componenets (Node.js)
+- Dapp UI (react app)
+
+Local test environment is:
+
+- Truffle v5.1.20 (core: 5.1.20)
+- Solidity v0.5.16 (solc-js)
+- Node v11.15.0
+- Web3.js v1.2.1
+- Ganache CLI v6.9.1 (ganache-core: 2.10.2)
+
+Install:
+
+**NOTE**: the command below should be run under the `scrt-swap` directory.
+
+```
+$ yarn
+```
+
 ### Run the Local Developer Testnet
 
 #### Enigma Blockchain
@@ -128,15 +155,52 @@ enigmacli keys list --keyring-backend test
 
 ![](enigmacli-keys-list.png)
 
-_In Progress ..._
 
-#### ENG to SCRT Unidirectional Swap Tooling
+#### ENG to SCRT Unidirectional Swap Tooling (scrt-swap)
 
-_In Progress ..._
+Start the local ethereum blockchain:
+
+```
+$ ganache-cli -d -i 50
+
+```
+
+Run the `scrt-swap` database (in another terminal).
+
+```
+$ docker-compose run --service-ports mongo
+
+```
+
+![](scrt-swap-mongodb-startup.png)
+
+
+Compile and deploy the smart contracts:
+
+```
+$ yarn migrate
+```
+
+The `EngToken` and `EngSwap` smart contracts are deployed
+
+![](migrated-engtoken-engswap-contracts.png)
+
+Setup the `.env` variables for the local testnet:
+
+![](scrt-swap-env-local-testnet.png)
+
 
 ## Local Developer Testnet Plan Results
 
-_In Progress ..._
+### Unit Tests
+
+Run the `scrt-swap` unit tests:
+
+```
+$ yarn test
+```
+
+PASS
 
 
 ## Testnet Test Plan
@@ -157,17 +221,27 @@ _In Progress ..._
 
 - [ ] Coordinate creation of `MultisigApproveAddress` - _Leader and Operator participants_ - _Ian | SecretNodes.org_
 
-- [ ] Proposal to approve the Leader's `MultisigApproveAddress` with information including all involved addresses and method of creation - _Ian | SecretNodes.org_
+	_In_Progress_
 
-- [ ] Proposal to set `MintingEnabled` to _true_ to turn on the actual token swap module - _Ian | SecretNodes.org_
+- [ ] Proposal to set tokenswap subspace parameters - _Ian | SecretNodes.org_
 
-- [x] Deploy ENG to SCRT Unidirectional Swap Tooling, including UI Burn Form - _Taariq_
+		`MultisigApproveAddress` : multisig address, for Leader and Operator participants
+		`MintingEnabled` : _true_ to turn on the actual token swap module
 
-	(This should be deployed to a cloud platform capable of auto-scaling)
+	_In_Progress_
+
+
+- [ ] Deploy ENG to SCRT Unidirectional Swap Tooling, including UI Burn Form - _TBD_
 
 	**UPDATE**: _Taariq_ has deployed the Swap Tooling and can be accessed here: [Secret IP]:5000
 
-- [ ] Deploy ENG to SCRT Ethereum contract to Testnet (Rinkeby) and publish contract address - _Taariq_
+	Update `.env` variables per testnet, including setting the MULTISIG_ADDRESS to approved address from goveranance proposal | _TBD_
+
+	_In_Progress_
+
+- [x] Deploy ENG to SCRT Ethereum contract to Testnet (Rinkeby) and publish contract address - _Taariq_
+
+	**UPDATE**: EngToken address is _______, EngSwap contract address is _______.
 
 - [x] MathWallet Chrome extension for testnet - _Eric | MathWallet_ 
 
@@ -179,7 +253,7 @@ _In Progress ..._
 **NOTE**: using Remix or Ethereum Studio
 
 1. Happy Path - Token swap request
-2. Token swap request by non-Leader
+2. Token swap request initiated with invalid `MultisigApproveAddress`
 3. Invalid parameters for token swap
 4. ENG wallet address **not** owned by sender
 5. SCRT wallet address **not** owned by receiver
@@ -204,7 +278,7 @@ _more TBD_
 
 ### Security Testing
 
-_TBD_
+1. Send with unauthorized MultisigApproveAddress
 
 ## Testnet Test Plan Results
 
@@ -243,17 +317,19 @@ These activities will be run iteratively, if applicable.
 
 - [ ] Initiate Pull Request to `https://github.com/enigmampc/EnigmaBlockchain` for token swap module - _Cashmaney_
 
+	**NOTE**: turn off `MintingEnabled` before submitting PR
+
 - [ ] Review/approve token swap PR - _Enigma core team_
 
 - [ ] Create Mainnet release of EnigmaBlockchain with approved PR `x/tokenswap` module (`enigmablockchain_tokenswap_testnet`) - _Enigma core team_
 
 - [ ] Publish and coordinate release info for installation by validators - _Enigma core team_
 
+- [ ] Deploy ENG to SCRT Ethereum contract to Ethereum Mainnet and publish contract address - _TBD_
+
 - [ ] Deploy ENG to SCRT Unidirectional Swap Tooling - _TBD_
 
 	(This should be deployed to a cloud platform capable of auto-scaling)
-
-- [ ] Deploy ENG to SCRT Ethereum contract to Ethereum Mainnet and publish contract address - _TBD_
 
 - [ ] MathWallet token swap front-end for dry-run is setup and made available to tester(s)
 
@@ -282,3 +358,6 @@ INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIM
 DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+## License
+
+MIT

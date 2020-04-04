@@ -67,11 +67,6 @@ The gas estimation will be included in the `scrt-swap` Burn Form UI to make it c
 
 Only a bit of ETH (less than 0.01) wil be required to deploy the token swap contract.
 
-## TBD
-
-- [ ] Need to get an update on using MathWallet for Testnet testing - _Eric | MathWallet_
-
-- [ ] There's a reference to a _genesis_ file in the tokenswap module. What do we need to do there?
 
 # Test Plans
 
@@ -148,25 +143,35 @@ _In Progress ..._
 
 ### Setup
 
-- [ ] Create Testnet release of _Cashmaney's_ enigma blockchain repo with the `x/tokenswap` module (`enigmablockchain_tokenswap_testnet`) - _TBD_
+- [x] Create Testnet release of _Cashmaney's_ enigma blockchain repo with the `x/tokenswap` module - _Dan | ChainOfSecrets.org_
 
-- [ ] Install `enigmablockchain_tokenswap_testnet` on Kamut - _Dan | ChainOfSecrets.org_
+- [x] Launch Kamut testnet release with tokenswap module - _Dan | ChainOfSecrets.org_
 
 - [ ] Coordinate release installation and setup on Kamut with tokenswap participants - _Dan | ChainOfSecrets.org_
 
-- [ ] Proposal to identify Leader and N Operators (N to be determined) - _SecretNodes.org_
+	_In Progress_
 
-- [ ] Coordinate creation of `MultisigApproveAddress` - _Leader and Operator participants_
+- [x] Proposal to identify Leader and N Operators (N to be determined) - _Ian | SecretNodes.org_
 
-- [ ] Proposal to approve the Leader's `MultisigApproveAddress` with information including all involved addresses and method of creation - _TBD_
+	**UPDATE**: M-of-N setup is set at 3-of-5 for both kamut and mainnet.
 
-- [ ] Proposal to set `MintingEnabled` to _true_ to turn on the actual token swap module - _TBD_
+- [ ] Coordinate creation of `MultisigApproveAddress` - _Leader and Operator participants_ - _Ian | SecretNodes.org_
 
-- [ ] Deploy ENG to SCRT Unidirectional Swap Tooling, including UI Burn Form - _TBD_
+- [ ] Proposal to approve the Leader's `MultisigApproveAddress` with information including all involved addresses and method of creation - _Ian | SecretNodes.org_
+
+- [ ] Proposal to set `MintingEnabled` to _true_ to turn on the actual token swap module - _Ian | SecretNodes.org_
+
+- [x] Deploy ENG to SCRT Unidirectional Swap Tooling, including UI Burn Form - _Taariq_
 
 	(This should be deployed to a cloud platform capable of auto-scaling)
 
-- [ ] Deploy ENG to SCRT Ethereum contract to Testnet (Kovan) and publish contract address - _TBD_
+	**UPDATE**: _Taariq_ has deployed the Swap Tooling and can be accessed here: [Secret IP]:5000
+
+- [ ] Deploy ENG to SCRT Ethereum contract to Testnet (Rinkeby) and publish contract address - _Taariq_
+
+- [x] MathWallet Chrome extension for testnet - _Eric | MathWallet_ 
+
+	Extension wallet guide: http://blog.mathwallet.org/?p=1096
 
 
 ### Integration Testing

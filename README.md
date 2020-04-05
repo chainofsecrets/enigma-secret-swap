@@ -70,7 +70,7 @@ Only a bit of ETH (less than 0.01) wil be required to deploy the token swap cont
 
 # Test Plans
 
-## Local Developer Testnet Plan
+## Local Testnet Plan
 
 ### Setup
 
@@ -113,7 +113,7 @@ SCRT receiver address: enigma1yuth8vrhemuu5m0ps0lv75yjhc9t86tf9hf83z
 
 - Mongo database (run in docker)
 - Smart contract (run in local blockchain)
-- Leader and Operator componenets (Node.js)
+- Leader and Operator components (Node.js)
 - Dapp UI (react app)
 
 Local test environment is:
@@ -132,7 +132,7 @@ Install:
 $ yarn
 ```
 
-### Run the Local Developer Testnet
+### Run the Local Testnet
 
 #### Enigma Blockchain
 
@@ -141,7 +141,8 @@ Run the container:
 docker run --name enigmachain -t enigmachain
 ```
 
-**NOTE**: The enigmachain docker container can be stopped using `docker stop enigmachain` and re-started using `docker start -i enigmachain`.
+**NOTE**: The enigmachain docker container can be stopped using `docker stop enigmachain` and re-started 
+using `docker start -i enigmachain`.
 
 In another terminal run a `bash` shell in the `enigmachain` container:
 ```
@@ -157,6 +158,8 @@ enigmacli keys list --keyring-backend test
 
 
 #### ENG to SCRT Unidirectional Swap Tooling (scrt-swap)
+
+Run the following commands from the `scrt-swap` directory.
 
 Start the local ethereum blockchain:
 
@@ -185,12 +188,11 @@ The `EngToken` and `EngSwap` smart contracts are deployed
 
 ![](migrated-engtoken-engswap-contracts.png)
 
+
 Setup the `.env` variables for the local testnet:
 
 ![](scrt-swap-env-local-testnet.png)
 
-
-## Local Developer Testnet Plan Results
 
 ### Unit Tests
 
@@ -200,10 +202,48 @@ Run the `scrt-swap` unit tests:
 $ yarn test
 ```
 
+The scenarios covered by the unit tests include (for Ethereum accounts):
+
+**NOTE**: For more detailed information see the [Enigma Swap - Multisig Setup Proposal](https://hackmd.io/AY1XxpRsQey1E-qB3iSyVg)
+
+The Trust model uses M-of-N, where N is the # of Operators. For Unit Testing the M-of-N setting is 2-of-3. The Leader is not part of the M-of-N.
+
+- Send `burnFunds` txn to EngSwap contract
+- The EngSwap contract captures the SCRT address and emits a `Burn(amount, scrtAddress)`
+- Leader process watches the Ethereum log for `Burn` events
+- For each `Burn` event the Leader:
+	- creates an unsigned multisig txn
+	- stores the unsigned txn in the database with a key of `transactionHash`
+- Operator watches the Ethereum log for `Burn` events
+- For each `Burn` event the Operator (M)
+	- waits for N confirmations
+	- upon N confirmations, gets the unsigned txn from the database by `transactionHash`
+	- verifies the `Burn` event attributes are correct by comparing with the unsigned txn retrieved from the database
+	- if the unsigned txn is verified, the Operator signs and stores the signed txn in the database
+- When a txn has M=N signatures in the database, the Leader signs the txn and submits the `tokenswap create` request to the Enigma Blockchain
+- The Leader stores the `tokenswap create` txn in the database using the `transactionHash`
+- The Enigma Blockchain validators participate in the minting of SCRT tokens to the specified `scrtAddress` by validating the multisig address and performing the mint
+
+
+### Integration Testing
+
+_TBD_: Should we have the Leader periodically poll the chain's REST API to get the transaction status or just to verify that the balance of the `scrtAddress` reflects the swap amount?
+
+
+### Functional End-to-End Testing
+
+
+
+## Local Testnet Results
+
+### Unit Tests
+
 PASS
 
+### Functional
 
-## Testnet Test Plan
+
+## Testnet (Rinkeby)
 
 ### Setup
 
@@ -239,7 +279,7 @@ PASS
 
 	_In_Progress_
 
-- [x] Deploy ENG to SCRT Ethereum contract to Testnet (Rinkeby) and publish contract address - _Taariq_
+- [x] Deploy ENG to SCRT Ethereum contract to Testnet and publish contract address - _Taariq_
 
 	**UPDATE**: EngToken address is _______, EngSwap contract address is _______.
 
@@ -251,6 +291,8 @@ PASS
 ### Integration Testing
 
 **NOTE**: using Remix or Ethereum Studio
+
+Enigma Token Contract Address (Rinkeby): 0xc0a1801ffa7cc2b126320ec6d2d99c024bd4e7fe
 
 1. Happy Path - Token swap request
 2. Token swap request initiated with invalid `MultisigApproveAddress`
@@ -349,6 +391,16 @@ These activities will be run iteratively, if applicable.
 
 
 **ENG to SCRT Burn! Complete**
+
+## Contributors
+
+- _Ian | SecretNodes.org_ - Project management and participation in ENG to SCRT Burn! tasks
+- _Cashmaney_ - Tokenswap Enigma Blockchain codebase
+- _ScotchFinance_ - ENG to SCRT Uniswap Tooling codebase, author of "Enigma Swap - Multisig Setup Proposal"
+- _Taariq Lecvack_ - Tokenswap Enigma Blockchain and ENG to SCRT Uniswap Tooling and UI codebases
+- _Eric | MathWallet_ - Enigma Dapp with SCRT wallet implementation, Chrome MathWallet extension
+- _Dan Briggsie | Chain of Secrets_ - Kamut Testnet launch, Kamut REST API, SecretScan.io (block explorer)
+- _Laura Weindorf | Chain of Secrets_ - Test planning, implementation and coordination
 
 ## Legal Disclaimer
 

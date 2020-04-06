@@ -189,11 +189,6 @@ The `EngToken` and `EngSwap` smart contracts are deployed
 ![](migrated-engtoken-engswap-contracts.png)
 
 
-Setup the `.env` variables for the local testnet:
-
-![](scrt-swap-env-local-testnet.png)
-
-
 ### Unit Tests
 
 Run the `scrt-swap` unit tests:
@@ -229,19 +224,142 @@ The Trust model uses M-of-N, where N is the # of Operators. For Unit Testing the
 
 _TBD_: Should we have the Leader periodically poll the chain's REST API to get the transaction status or just to verify that the balance of the `scrtAddress` reflects the swap amount?
 
+### Setup
+
+Add another Operator key:
+
+```
+$ enigmacli keys add c --keyring-backend test
+```
+
+**NOTE**: The Operator user name set in each leader/operator process should be set to the key alias used by the validator.
+
+!()[operator-c-key.png]
+
+Add another key for the Leader:
+
+```
+$ enigmacli keys add leader --keyring-backend test
+```
+
+!()[leader-key.png]
+
+### Run Operators and Leader
+
+For each of the 3 Operators and the 1 Leader, create an `<key>.env` file before starting the process and set the OPERATOR_USER to the key alias.
+
+![](scrt-swap-env-local-testnet.png)
+
+
+Start Operator a:
+
+```
+$ ROLE=operator node ./server.js
+```
+
+Start Operator b:
+
+```
+$ ROLE=operator node ./server.js
+```
+
+Start Operator c:
+
+```
+$ ROLE=operator node ./server.js
+```
+
+Start Leader:
+
+```
+$ ROLE=operator node ./server.js
+```
+
+
+
 
 ### Functional End-to-End Testing
 
+
+### Burn Form UI
+
+
+Setup and start the React app front-end:
+
+**NOTE**: Run the following command from the `scrt-swap/client` directory.
+
+Install dependencies:
+
+```
+$ yarn install
+```
+
+Start the react app, listening on `http://localhost:3000`:
+
+```
+$ yarn start
+```
+
+which opens a browser and displays the _UI Burn Form_.
+
+![](burn-form-ui.png)
+
+
+### Test Scenarios
+
+1. 
+2. 
+
+_TBD_
 
 
 ## Local Testnet Results
 
 ### Unit Tests
 
-PASS
+(4) PASSED
 
-### Functional
 
+### Integration Tests
+
+3. Start Operator process
+
+	Getting periodic exceptions on `const currentBlock = await this.web3.eth.getBlockNumber()` in BurnWatcher:
+
+		```
+		Invalid JSON RPC Response ""
+		```
+
+FAILED
+
+4. Set `fromBlock` to specific block to start at later block.
+
+	`fromBlock` - 68
+	
+	Operator code rewound to `fromBlock` - N confirmations, which are set to 2 to get `toBock` = 66
+
+	Using `getPastEvents` with `fromBlock: 68`, `toBlock: 66` results in _NaN_ exception
+
+FAILED
+
+5. Got duplicate key on insert in database.
+
+	Not sure how I got into this situation, could've been due to running unit tests beforehand (?)
+
+	Should add some handling if a duplicate key scenario occurs
+
+FAILED
+
+
+(3) Tests Failed.
+
+
+### Functional End-to-End Testing
+
+[ ] - Handle `fromBlock` setting in case the operator/leader process goes down (server reboot or some error) so it can be restarted.
+
+	Recommendation: add another collection to MongoDB to keep track of the last block number and use that when restarting if the `fromBlock` .env setting is 0.
+	
 
 ## Testnet (Rinkeby)
 
@@ -251,13 +369,9 @@ PASS
 
 - [x] Launch Kamut testnet release with tokenswap module - _Dan | ChainOfSecrets.org_
 
-- [ ] Coordinate release installation and setup on Kamut with tokenswap participants - _Dan | ChainOfSecrets.org_
+- [ ] Proposal to identify Leader and N Operators (N to be determined) - _Ian | SecretNodes.org_
 
-	_In Progress_
-
-- [x] Proposal to identify Leader and N Operators (N to be determined) - _Ian | SecretNodes.org_
-
-	**UPDATE**: M-of-N setup is set at 3-of-5 for both kamut and mainnet.
+	**UPDATE**: M-of-N setup is set at 2-of-3 for kamut.
 
 - [ ] Coordinate creation of `MultisigApproveAddress` - _Leader and Operator participants_ - _Ian | SecretNodes.org_
 
@@ -270,18 +384,17 @@ PASS
 
 	_In_Progress_
 
+- [ ] Coordinate release installation and setup on Kamut with tokenswap participants - _Dan | ChainOfSecrets.org_
 
-- [ ] Deploy ENG to SCRT Unidirectional Swap Tooling, including UI Burn Form - _TBD_
+	**UPDATE**: Kamut testnet is up and running
 
-	**UPDATE**: _Taariq_ has deployed the Swap Tooling and can be accessed here: [Secret IP]:5000
+	_Waiting on proposal to identify participants_
 
-	Update `.env` variables per testnet, including setting the MULTISIG_ADDRESS to approved address from goveranance proposal | _TBD_
+- [x] Deploy ENG to SCRT Unidirectional Swap contracts and UI - _Taariq_
 
-	_In_Progress_
+	The EngToken and EngSwap contracts to Rinkeby. EngToken address is _______, EngSwap contract address is _______.
+	UI which can be accessed here: [Secret IP]:5000
 
-- [x] Deploy ENG to SCRT Ethereum contract to Testnet and publish contract address - _Taariq_
-
-	**UPDATE**: EngToken address is _______, EngSwap contract address is _______.
 
 - [x] MathWallet Chrome extension for testnet - _Eric | MathWallet_ 
 

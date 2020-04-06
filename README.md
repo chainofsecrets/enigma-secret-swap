@@ -1,6 +1,10 @@
 # enigma-secret-swap
 
+## WiP
+
 Test planning and implementation for the ENG to SCRT Burn! proposal created by SecretNodes.org: https://ipfs.io/ipfs/QmUvhWUYW1jpqjZSJjRKUB5y1RixuuvaD27Vbtgbvf1Kjm/Burn_ENG_for_SCRT-v1.pdf
+
+## Repository
 
 This repo uses Git submodules to include the ENG to SCRT Unidirectional Swap Tooling and Enigma Blockchain with Tokenswap repositories. To clone and work with this repository for testing clone the repo using:
 
@@ -234,7 +238,7 @@ $ enigmacli keys add c --keyring-backend test
 
 **NOTE**: The Operator user name set in each leader/operator process should be set to the key alias used by the validator.
 
-!()[operator-c-key.png]
+![](operator-c-key.png)
 
 Add another key for the Leader:
 
@@ -242,7 +246,7 @@ Add another key for the Leader:
 $ enigmacli keys add leader --keyring-backend test
 ```
 
-!()[leader-key.png]
+![](leader-key.png)
 
 ### Run Operators and Leader
 

@@ -39,6 +39,10 @@ Some information on creating and using Multisig transactions on the Enigma Block
 
 Created by another Enigma Blockchain validator, _Cashmaney_, this is the repo that contains the actual SCRT minting code and is invoked by the Leader (above).
 
+- [Kamut Testnet Blockchain](https://github.com/ChainofSecrets.org/KamutBlockchain)
+
+The Kamut testnet, created and operated by [ChainofSecrets.org](https://ChainofSecrets.org), has _Cashmaney's_ tokenswap module. This repo is used for local end-to-end testing as well as the planned testnet for the ENG to SCRT tokenswap.
+
 ## Disclaimer
 
 This repository and submodules, including all smart contract and tokenswap chain components, has not been professionally audited and is not intended 

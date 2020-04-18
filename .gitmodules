@@ -4,3 +4,6 @@
 [submodule "enigmachain"]
 	path = enigmachain
 	url = https://github.com/Cashmaney/enigmachain
+[submodule "KamutBlockchain"]
+	path = KamutBlockchain
+	url = https://github.com/chainofsecrets/KamutBlockchain

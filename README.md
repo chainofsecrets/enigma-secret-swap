@@ -138,7 +138,7 @@ bash chain_init.sh
 
 The output should look like this:
 
-![](enigma-kamut-chain.png)
+![](enigma-kamut-chain-init.png)
 
 **NOTE**: Using a separate terminal th eenigma kamut docker container can be stopped using `docker stop enigma_kamut` and re-started 
 using `docker start -it enigma_kamut` and re-issuing the `bash chain_init.sh` command.

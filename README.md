@@ -127,7 +127,7 @@ $ yarn
 In a terminal run the container:
 
 ```
-docker run -it enigma_kamut
+docker run -it enigma_kamut --name enigma_kamut
 ```
 
 At the _root_ prompt run the following command to start the enigma blockchain:
@@ -149,12 +149,45 @@ Connect to the container using:
 docker exec -it enigmachain /bin/bash
 ```
 
-Check the keys:
-```
-enigmacli keys list --keyring-backend test
-````
+Use the following commands to create 3 operators and 1 leader key. 
 
-![](enigmacli-keys-list.png)
+**NOTE**: Save the key output for later.
+
+```
+root@879f2d909a6f:~# kamutcli keys add operator1 --keyring-backend test
+{
+  "name": "operator1",
+  "type": "local",
+  "address": "kamut1t3vjyvnm9c2sunsdsntyt0crk4p0ffmurfas3h",
+  "pubkey": "kamutpub1addwnpepqv45um3jjyw9z5n60fzp87e0k09wf2qwva0ecfhantqs75zm5d607m8cdhn",
+  "mnemonic": "jungle very armor pigeon catch anxiety holiday lady elevator appear swamp vapor leaf among omit december twelve benefit fade hat digital cream foil pull"
+}
+root@879f2d909a6f:~# kamutcli keys add operator2 --keyring-backend test
+{
+  "name": "operator2",
+  "type": "local",
+  "address": "kamut1lskz9t9jdcu7yx469pq3nn3w6en9cc00tw37w8",
+  "pubkey": "kamutpub1addwnpepqvhf5w47ev5p6dctx3q9rwnrlcltfyegx7kkwyfnt0gnm97c78vu62jwcyl",
+  "mnemonic": "layer knee moon despair shy sand noodle pelican napkin couple lazy fortune sample volcano festival increase install sport autumn panda more hobby victory sample"
+}
+root@879f2d909a6f:~# kamutcli keys add operator3 --keyring-backend test
+{
+  "name": "operator3",
+  "type": "local",
+  "address": "kamut1grupe0mxhyyqce8hrmql2ax8tdcyc5d7cntqqp",
+  "pubkey": "kamutpub1addwnpepqvec4d6uk6f9x0defkv2k4ke3z4tvruh8urkh6muygfxkvssc2zzv3f3zx4",
+  "mnemonic": "general left supply auto tool trim goat pyramid valid mango easily mom park clay cradle uniform icon feature easily fame clarify found trial erosion"
+}
+root@879f2d909a6f:~# kamutcli keys add leader --keyring-backend test
+{
+  "name": "leader",
+  "type": "local",
+  "address": "kamut1q6frtlu9yqj29m2c2rsf89pgruvflg4mlwh087",
+  "pubkey": "kamutpub1addwnpepqd7fg4vcv3c5txhkw9skup3mvn90d3rljmtcfdzdvszf8p42qd83uqk8gnd",
+  "mnemonic": "tip priority spring allow ability expire use knife sea lottery happy twelve vivid limit measure capital deposit bright power ecology start giggle device front"
+}
+
+```
 
 
 #### ENG to SCRT Unidirectional Swap Tooling (scrt-swap)

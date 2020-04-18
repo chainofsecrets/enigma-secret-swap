@@ -88,7 +88,7 @@ cd enigmachain
 
 Build the docker container and run the local Enigma Blockchain:
 ```
-docker build -f .\Dockerfile_build -t enigmachain .
+docker build -f Dockerfile_node -t enigmachain .
 ```
 
 The local devnet `enigmachain` is configured with the following addresses and transaction hashes:
@@ -230,25 +230,21 @@ _TBD_: Should we have the Leader periodically poll the chain's REST API to get t
 
 ### Setup
 
-Add another Operator key:
-
-```
-$ enigmacli keys add c --keyring-backend test
-```
-
 **NOTE**: The Operator user name set in each leader/operator process should be set to the key alias used by the validator.
 
-![](operator-c-key.png)
-
-Add another key for the Leader:
+Add keys for the Operators and Leader:
 
 ```
+$ enigmacli keys add a --keyring-backend test
+$ enigmacli keys add b --keyring-backend test
+$ enigmacli keys add c --keyring-backend test
 $ enigmacli keys add leader --keyring-backend test
 ```
 
-![](leader-key.png)
+![](enigmacli-keys-list-integration-test.png)
 
-### Run Operators and Leader
+
+### Run Leader and Operators
 
 For each of the 3 Operators and the 1 Leader, create an `<key>.env` file before starting the process and set the OPERATOR_USER to the key alias.
 
@@ -280,6 +276,11 @@ $ ROLE=operator node ./server.js
 ```
 
 
+Open Ethereum Remix: https://remix.ethereum.org and add the `EngToken.sol` and `EngSwap.sol` contracts. For the Integration testing done initially, we've modified the contracts in Remix to use the OpenZeppelin contracts in GitHub, which are using Solidity 0.6.0 so these modifications were necessary:
+
+![](EngToken-remix.png)
+
+![](EngSwap-remix.png)
 
 
 ### Functional End-to-End Testing
